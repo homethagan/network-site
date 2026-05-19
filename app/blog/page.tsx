@@ -1,6 +1,19 @@
 import { getAllPosts, getCategories } from '@/lib/posts';
 import Link from 'next/link';
+import { Metadata } from 'next';
 import ClientBlogFilters from '@/components/ClientBlogFilters';
+
+export const metadata: Metadata = {
+  title: 'Blog - HomeThagan Academy | Learn Cloud Computing & Networking',
+  description: 'Explore comprehensive tutorials on cloud computing, networking, DevOps, Kubernetes, AWS, and modern infrastructure. Learn from industry experts.',
+  keywords: 'blog, cloud computing, networking, DevOps, Kubernetes, AWS, infrastructure, tutorials, articles',
+  openGraph: {
+    title: 'Blog - HomeThagan Academy',
+    description: 'Comprehensive tutorials on cloud computing, networking, and infrastructure',
+    type: 'website',
+    url: 'https://homethagan.com/blog',
+  },
+};
 
 export default function BlogPage() {
   const allPosts = getAllPosts(true);

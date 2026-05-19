@@ -1,6 +1,19 @@
 import { HeroSection, TopicsGrid, CTABanner } from '@/components/Home';
 import { getAllPosts } from '@/lib/posts';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'HomeThagan - Learn Networking & Cloud Computing',
+  description: 'Master cloud computing and networking with comprehensive courses and tutorials. Learn DevOps, Kubernetes, AWS, and modern infrastructure from industry experts.',
+  keywords: 'cloud computing, networking, DevOps, Kubernetes, AWS, infrastructure, tutorials, courses',
+  openGraph: {
+    title: 'HomeThagan - Learn Networking & Cloud Computing',
+    description: 'Master cloud computing and networking with comprehensive courses and tutorials',
+    type: 'website',
+    url: 'https://homethagan.com',
+  },
+};
 
 export default function Home() {
   const recentPosts = getAllPosts(true).slice(0, 3);

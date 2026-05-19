@@ -1,3 +1,11 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us - HomeThagan Academy',
+  description: 'Learn about HomeThagan Academy, our mission to democratize cloud computing and networking education for students worldwide.',
+  keywords: 'about, HomeThagan Academy, cloud computing education, networking tutorials',
+};
+
 export default function AboutPage() {
   return (
     <div>

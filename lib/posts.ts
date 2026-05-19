@@ -46,7 +46,20 @@ export function getAllPosts(publishedOnly = true): Post[] {
   return posts;
 }
 
-export function getPostBySlug(slug: string): Post | null {
+export function getPostBySlug(slugParam?: string | string[]): Post | null {
+  if (!slugParam) return null;
+
+  // Normalize slug when it's an array or encoded
+  let slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
+  try {
+    slug = decodeURIComponent(String(slug));
+  } catch {
+    slug = String(slug);
+  }
+
+  // Remove any leading slashes
+  if (slug.startsWith('/')) slug = slug.replace(/^\/+/, '');
+
   try {
     const realSlug = slug.replace(/\.md$/, '');
     const fullPath = path.join(postsDirectory, `${realSlug}.md`);
