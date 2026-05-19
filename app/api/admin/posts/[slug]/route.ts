@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: any
 ) {
   const authenticated = await isAdminAuthenticated();
   if (!authenticated) {
@@ -12,7 +12,8 @@ export async function GET(
   }
 
   try {
-    const post = getPostBySlug(params.slug);
+    const { slug } = await context.params;
+    const post = getPostBySlug(slug);
     if (!post) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
@@ -24,7 +25,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: any
 ) {
   const authenticated = await isAdminAuthenticated();
   if (!authenticated) {
@@ -33,6 +34,7 @@ export async function PUT(
 
   try {
     const post = await request.json();
+    const { slug } = await context.params;
     savePost(post);
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -42,7 +44,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: any
 ) {
   const authenticated = await isAdminAuthenticated();
   if (!authenticated) {
@@ -50,7 +52,8 @@ export async function DELETE(
   }
 
   try {
-    deletePost(params.slug);
+    const { slug } = await context.params;
+    deletePost(slug);
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
